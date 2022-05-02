@@ -27,4 +27,26 @@ $>./alpha_mirror | cat -e
 $
 $>
 */
+#include <unistd.h>
 
+int	main(int argc, char **argv)
+{
+	int	index;
+
+	index = 0;
+	if (argc == 2)
+	{
+		while (argv[1][index] != '\0')
+		{
+			if (argv[1][index] >= 'a' && argv[1][index] <= 'z')
+				argv[1][index] = 'n' - (argv[1][index] - 'm');
+			else if (argv[1][index] >= 'A' && argv[1][index] <= 'Z')
+				argv[1][index] = 'N' - (argv[1][index] - 'M');
+			write(1, &argv[1][index], 1);
+			index++;
+		}
+	}
+	else
+		write(1, "\n", 1);
+	return (0);
+}
